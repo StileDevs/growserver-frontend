@@ -5,10 +5,7 @@ on:
     types: [published]
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
   release:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
