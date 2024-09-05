@@ -17,12 +17,12 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build.zip
+          name: build
 
       - name: Upload Artifacts to GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: build.zip
+          artifacts: build
           allowUpdates: true
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
