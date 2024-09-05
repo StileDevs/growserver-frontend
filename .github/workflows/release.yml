@@ -29,7 +29,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      - name: Build Apps
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build website
         run: pnpm run build
 
       - name: Compress build files
