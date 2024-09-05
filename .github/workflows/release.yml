@@ -1,6 +1,8 @@
 name: Build React
 
 on:
+  push:
+    branches: ["main"]
   release:
     types: [published]
 
