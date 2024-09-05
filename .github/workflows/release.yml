@@ -5,7 +5,10 @@ on:
     types: [published]
 
 jobs:
+  build:
+    uses: ./.github/workflows/build.yml
   release:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,7 +17,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build.zip
+          name: build
 
       - name: Upload Artifacts to GitHub Release
         uses: ncipollo/release-action@v1
