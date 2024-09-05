@@ -36,5 +36,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build.zip
           path: dist
