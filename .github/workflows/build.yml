@@ -3,6 +3,7 @@ name: Build React
 on:
   push:
     branches: ["**"]
+  workflow_call:
 
 jobs:
   build:
