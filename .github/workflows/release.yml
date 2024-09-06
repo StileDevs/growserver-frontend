@@ -23,10 +23,13 @@ jobs:
       - name: Display structures
         run: ls -R
 
+      - name: Compress Artifacts
+        run: zip -r build.zip artifacts
+
       - name: Upload Artifacts to GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: artifacts
+          artifacts: build.zip
           name: build.zip
           allowUpdates: true
           omitBodyDuringUpdate: true
