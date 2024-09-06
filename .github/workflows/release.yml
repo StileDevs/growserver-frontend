@@ -26,7 +26,8 @@ jobs:
       - name: Upload Artifacts to GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: artifacts/build.zip
+          artifacts: artifacts
+          name: build.zip
           allowUpdates: true
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
