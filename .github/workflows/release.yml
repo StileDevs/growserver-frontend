@@ -17,14 +17,14 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          path: website
           name: build.zip
 
       - name: Display structures
         run: ls -R
 
       - name: Compress Artifacts
-        run: zip -r build.zip artifacts
+        run: zip -r build.zip website
 
       - name: Upload Artifacts to GitHub Release
         uses: ncipollo/release-action@v1
