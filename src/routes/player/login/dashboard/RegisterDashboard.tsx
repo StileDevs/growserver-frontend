@@ -62,13 +62,10 @@ export function RegisterDashboard({ state }: { state: string }) {
 
       if (res.status !== 200) throw new Error("Failed to validate");
 
-      console.log("Success, navigating...");
       setTimeout(() => {
         setIsOpen(false);
       }, 3000);
-      setTimeout(() => {
-        window.location.href = `/player/growid/login/validate?token=${res.data.token}`;
-      }, 3500);
+      window.location.href = `/player/growid/login/validate?token=${res.data.token}`;
     } catch (e) {
       alert("Failed to validate");
       console.error(e);
