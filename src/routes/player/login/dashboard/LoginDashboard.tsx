@@ -4,6 +4,16 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const itemVariants: Variants = {
   open: {
@@ -33,11 +43,7 @@ const formSchema = z.object({
 export function LoginDashboard({ state }: { state: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors }
-  } = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       growId: "",
@@ -125,39 +131,53 @@ export function LoginDashboard({ state }: { state: string }) {
             <motion.h1 variants={itemVariants} className="text-center font-bold text-xl mb-2">
               Login
             </motion.h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <motion.div variants={itemVariants}>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  className="input input-bordered w-full max-w-xs"
-                  {...register("growId")}
-                />
-                {errors.growId && <p>{errors.growId.message}</p>}
-              </motion.div>
-              <motion.div variants={itemVariants} className="mt-4">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="input input-bordered w-full max-w-xs"
-                  {...register("password")}
-                />
-                {errors.password && <p>{errors.password.message}</p>}
-              </motion.div>
-              <motion.button
-                type="submit"
-                variants={itemVariants}
-                whileHover={{
-                  scale: 1.05
-                }}
-                whileTap={{
-                  scale: 0.95
-                }}
-                className="text-white w-full bg-primary rounded-md p-2 cursor-pointer my-4"
-              >
-                Submit
-              </motion.button>
-            </form>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <motion.div variants={itemVariants}>
+                  <FormField
+                    control={form.control}
+                    name="growId"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>GrowID</FormLabel>
+                        <FormControl>
+                          <Input placeholder="FooBar" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input placeholder="********" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </motion.div>
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{
+                    scale: 1.05
+                  }}
+                  whileTap={{
+                    scale: 0.95
+                  }}
+                >
+                  <Button type="submit" className="w-full">
+                    Submit
+                  </Button>
+                </motion.div>
+              </form>
+            </Form>
           </motion.div>
         </AnimatePresence>
       </motion.div>
